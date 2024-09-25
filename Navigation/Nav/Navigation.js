@@ -7,10 +7,13 @@ import { NavigationContainer } from "@react-navigation/native";
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
+
 //importar Screens
 import HomeScreen from "./screens/HomeScreen";
 import SettingsScreen from "./screens/SettingsScreen";
 import StackScreen from "./screens/StackScreen";
+import MyKeyboard from "./src/components/MyKeyboard";
+
 
 const Stack = createStackNavigator();
 function MyStack() {
@@ -27,12 +30,20 @@ function MyStack() {
 
             />
             <Stack.Screen
+                name="Calculadora"
+                component={MyKeyboard}
+                options={{
+                    headerBackTitleVisible: false,      
+                }}
+            />
+            <Stack.Screen
                 name="StackScreen"
                 component={StackScreen}
                 options={{
                     headerBackTitleVisible: false,      
                 }}
             />
+
         </Stack.Navigator>
     )
 }
@@ -44,8 +55,8 @@ function MyTabs() {
         <Tab.Navigator
             initialRouteName="Home"
             screenOptions={{
-                tabBarActiveTintColor: "red",
-                tabBarInactiveTintColor: "black",
+                tabBarActiveTintColor: "blue",
+                tabBarInactiveTintColor: "gray",
                 tabBarLabelStyle: ({color: "black"}),
             }}
         >
@@ -53,13 +64,14 @@ function MyTabs() {
                 name="Home" 
                 component={MyStack}
                 options={{
-                    tabBarLabel:"Feed",
+                    tabBarLabel:"Inicio",
                     tabBarIcon: ({ color, size }) => (
                         <MaterialCommunityIcons name="newspaper-variant-outline" size={size} color={color} />
                     ),
                     headerShown: false,
                 }}
                 />
+
                 
             <Tab.Screen 
                 name="Settings" 
