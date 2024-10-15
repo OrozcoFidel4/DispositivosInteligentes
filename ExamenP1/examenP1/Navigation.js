@@ -12,6 +12,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import HomeScreen from "./screens/HomeScreen";
 import VideoScreen from "./screens/StackScreen"
 import ButtonsScreen from "./screens/ButtonsScreen";
+import { TouchableOpacity, Switch, GestureHandlerRootView  } from "react-native-gesture-handler";
 
 
 const Stack = createStackNavigator();
@@ -83,8 +84,8 @@ function MyTabs() {
 export default function Navigation() {
     return(
         <NavigationContainer>
-            
             <MyTabs/>
         </NavigationContainer>
+        
     );
 }
