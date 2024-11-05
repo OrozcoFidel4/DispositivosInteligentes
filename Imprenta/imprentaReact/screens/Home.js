@@ -3,23 +3,12 @@ import {Text, TouchableOpacity, ScrollView, StyleSheet, View} from 'react-native
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 import moment from 'moment/moment';
 import { useNavigation } from "@react-navigation/native";
+import Clock from '../components/clock';
 
 
 const Home = () => {
 
-    /* const clock = setInterval(
-        function time(){
-            const time = moment().format('MMMM D YYYY, h:mm:ss a')
-            time.toString()
-            console.log(time)
-
-            return time
-        
-        }, 1000) */
-
     const navigation = useNavigation();
-
-    clock = moment().format('h:mm A') 
 
     return (
         <SafeAreaProvider>
@@ -33,11 +22,7 @@ const Home = () => {
                             fontWeight: 'bold'
                     }}>Bienvenido, Usuario!</Text>
 
-                    <Text 
-                    style={{
-                            fontSize: 15,
-                            alignItems: 'flex-end',
-                    }}>{clock}</Text>
+                    <Clock></Clock>
 
                     </View>
 
