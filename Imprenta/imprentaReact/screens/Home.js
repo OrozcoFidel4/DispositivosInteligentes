@@ -35,47 +35,80 @@ const Home = () => {
                             color: 'gray'
                     }}>En que podemos ayudarte hoy?</Text>
                     </View>
+
+                    <View style={{
+                        flexDirection: 'row',
+                        alignItems: 'flex-start',
+                        justifyContent: 'space-evenly'}}>
                     
+                        <TouchableOpacity
+                        onPress={() => navigation.navigate('Impresiones')}
+                        style={styles.boton}>
 
-                    <TouchableOpacity
-                    onPress={() => navigation.navigate('Impresiones')}
-                    style={styles.boton}>
+                            <Text
+                            style={styles.textoBoton}>Modulo
+                            </Text>
 
-                        <Text
-                        style={styles.textoBoton}>Impresiones &#x2192;
-                        </Text>
+                            <Text
+                            style={styles.textoBoton}>Impresion &#x2192;
+                            </Text>
 
-                    </TouchableOpacity>
+                        </TouchableOpacity>
 
-                    <TouchableOpacity
-                    onPress={() => navigation.navigate('Personalizacion')}
-                    style={styles.boton}>
+                        <TouchableOpacity
+                        onPress={() => navigation.navigate('Personalizacion')}
+                        style={styles.boton}>
 
-                        <Text
-                        style={styles.textoBoton}>Personalizacion &#x2192;
-                        </Text>
+                            <Text
+                            style={styles.textoBoton}>Modulo
+                            </Text>
 
-                    </TouchableOpacity>
+                            <Text
+                            style={styles.textoBoton}>Personalizacion &#x2192;
+                            </Text>
 
-                    <TouchableOpacity
-                    onPress={() => navigation.navigate('Lonas')}
-                    style={styles.boton}>
 
-                        <Text
-                        style={styles.textoBoton}>Lonas &#x2192;
-                        </Text>
+                        </TouchableOpacity>
 
-                    </TouchableOpacity>
 
-                    <TouchableOpacity
-                    onPress={() => navigation.navigate('Reportes')}
-                    style={styles.botonReportes}>
+                    </View>
 
-                        <Text
-                        style={styles.textoBoton}>Reportes &#x2192;
-                        </Text>
+                    <View style={{
+                        flexDirection: 'row',
+                        alignItems: 'flex-start',
+                        justifyContent: 'space-evenly'}}>
+                    
+                    
+                        <TouchableOpacity
+                        onPress={() => navigation.navigate('Lonas')}
+                        style={styles.boton}>
 
-                    </TouchableOpacity>
+                            <Text
+                            style={styles.textoBoton}>Modulo
+                            </Text>
+
+                            <Text
+                            style={styles.textoBoton}>Lonas &#x2192;
+                            </Text>
+
+                        </TouchableOpacity>
+
+                        <TouchableOpacity
+                        onPress={() => navigation.navigate('Reportes')}
+                        style={styles.botonReportes}>
+
+                            <Text
+                            style={styles.textoBoton}>Modulo
+                            </Text>
+
+                            <Text
+                            style={styles.textoBoton}>Reportes &#x2192;
+                            </Text>
+
+                        </TouchableOpacity>
+
+                    </View>
+                    
 
 
                 </ScrollView>
@@ -127,7 +160,9 @@ const styles = StyleSheet.create({
         padding:10,
         marginTop: '5%',
         marginBottom: '5%',
-        width: '50%',
+        width: '40%',
+        height: 100,
+        justifyContent: 'center',
         alignSelf: 'center',
         borderRadius: 10
     },
@@ -137,7 +172,9 @@ const styles = StyleSheet.create({
         padding:10,
         marginTop: '5%',
         marginBottom: '5%',
-        width: '50%',
+        width: '40%',
+        height: 100,
+        justifyContent: 'center',
         alignSelf: 'center',
         borderRadius: 10
     },
