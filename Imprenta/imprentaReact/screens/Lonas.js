@@ -50,13 +50,13 @@ const Lonas = () => {
         if (!ancho) {
             errors.ancho = 'Ancho es obligatorio';
         } else if (!dimensionChars.test(ancho)) {
-            errors.ancho = 'La medida Ancho debe ser en formato: XX.XX';
+            errors.ancho = 'La medida Ancho debe ser en formato: XX.XX Mts';
         }
 
         if (!alto) {
             errors.alto = 'Alto es obligatorio';
         } else if (!dimensionChars.test(alto)) {
-            errors.alto = 'La medida Alto debe ser en formato: XX.XX';
+            errors.alto = 'La medida Alto debe ser en formato: XX.XX Mts';
         }
 
         // Set the errors and update form validity
@@ -147,10 +147,13 @@ const Lonas = () => {
                             marginBottom: 20
                     }}>Informacion Del Cliente</Text>
                     
-                    <TextInput style={styles.input} placeholder='Nombre' value={name} onChangeText={setName}></TextInput>
+                    
+                    <View>
+                        <TextInput style={styles.input} placeholder='Nombre' value={name} onChangeText={setName}></TextInput>
 
-                    <TextInput style={styles.input} placeholder='Telefono' value={phone} onChangeText={setPhone}></TextInput>
-
+                        <TextInput style={styles.input} placeholder='Telefono' value={phone} onChangeText={setPhone}></TextInput>
+                    </View>
+                    
                     <Text 
                     style={{
                             fontSize: 20,
@@ -185,7 +188,7 @@ const Lonas = () => {
                     style={styles.boton}>
 
                         <Text
-                        style={styles.textoBoton}>Register &#x2192;
+                        style={styles.textoBoton}>Realizar Pedido &#x2192;
                         </Text>
 
                     </TouchableOpacity>}
