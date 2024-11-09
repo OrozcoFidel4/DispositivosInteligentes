@@ -11,6 +11,8 @@ import Impresiones from "./screens/Impresiones";
 import Personalizacion from "./screens/Personalizacion";
 import Lonas from "./screens/Lonas";
 import Reportes from "./screens/Reportes";
+import ImagePickerExample from "./screens/pruebas/Picker";
+import Validation from "./screens/pruebas/Validation";
 
 const Stack = createNativeStackNavigator();
 function MyStack() {
@@ -21,6 +23,15 @@ function MyStack() {
             <Stack.Screen
                 name="Home"
                 component={Home}
+                options={{
+                    headerShown: true
+                }}
+
+            />
+
+            <Stack.Screen
+                name="Picker"
+                component={ImagePickerExample}
                 options={{
                     headerShown: true
                 }}
@@ -62,13 +73,31 @@ function MyStack() {
                 }}
 
             />
+
+            <Stack.Screen
+                name="Login"
+                component={Login}
+                options={{
+                    headerShown: true
+                }}
+
+            />
+
+            <Stack.Screen
+                name="Register"
+                component={Register}
+                options={{
+                    headerShown: true
+                }}
+
+            />
             
 
         </Stack.Navigator>
     )
 }
 
-const Tab = createBottomTabNavigator();
+/* const Tab = createBottomTabNavigator();
 
 function MyTabs() {
     return(
@@ -107,12 +136,12 @@ function MyTabs() {
                 }}/>
         </Tab.Navigator>
     );
-}
+} */
 
 export default function Navigation() {
     return(
         <NavigationContainer>
-            <MyTabs/>
+            <MyStack/>
         </NavigationContainer>
     );
 }
