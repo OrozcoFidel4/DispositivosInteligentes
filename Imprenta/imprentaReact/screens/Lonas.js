@@ -79,6 +79,7 @@ const Lonas = () => {
         }
     }
 
+
     //Codigo para Scroll
     const [screenDimensions, setScreenDimensions] = useState(Dimensions.get('window'));
 
@@ -153,7 +154,7 @@ const Lonas = () => {
 
                         <TextInput style={styles.input} placeholder='Telefono' value={phone} onChangeText={setPhone}></TextInput>
                     </View>
-                    
+
                     <Text 
                     style={{
                             fontSize: 20,

@@ -5,6 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 import { GestureHandlerRootView, TextInput } from 'react-native-gesture-handler';
 import Clock from '../components/clock';
 import * as ImagePicker from 'expo-image-picker';
+import { SelectList } from 'react-native-dropdown-select-list';
 
 
 const Personalizacion = () => {
@@ -64,10 +65,19 @@ const Personalizacion = () => {
         setIsFormValid(Object.keys(errors).length === 0);
     };
 
-    /* Codigo para la navegacion */
+    // Codigo para la navegacion 
     const navigation = useNavigation();
 
-    /* Codigo para cargar imagen */
+    //Codigo para SelectList
+    const [selected, setSelected] = useState('');
+    const data = [
+        {key:'1', value:'Camisa'},
+        {key:'2', value:'Sudadera'},
+        {key:'3', value:'Taza'},
+        
+    ]
+
+    // Codigo para cargar imagen
     const [image, setImage] = useState('')
 
     const handleImagePickerPress = async() => {
@@ -113,9 +123,9 @@ const Personalizacion = () => {
 
                     <Clock></Clock>
 
-                    </View>
+                </View>
 
-                    <View style={styles.superior2}>
+                <View style={styles.superior2}>
                     
                     <Text 
                     style={{
@@ -123,80 +133,61 @@ const Personalizacion = () => {
                             marginTop: 5,
                             color: 'gray'
                     }}>Usuario</Text>
-                    </View>
+                </View>
                     
-                    <View>
+                {image && <Image source={{ uri: image }} style={styles.image} />}
 
-                    {image && <Image source={{ uri: image }} style={styles.image} />}
+                <TouchableOpacity style={styles.botonCarga}onPress={handleImagePickerPress}>
 
-                    <TouchableOpacity style={styles.botonCarga}onPress={handleImagePickerPress}>
+                    <Text
+                        style={styles.textoBoton}>Cargar Diseño
+                    </Text>
 
-                        <Text
-                            style={styles.textoBoton}>Cargar Diseño
-                        </Text>
+                </TouchableOpacity>
 
-                    </TouchableOpacity>
+                <View>
 
-                    {image && <GestureHandlerRootView>
+                    <SelectList boxStyles={{
+                        width:'80%', 
+                        borderRadius:'30%', 
+                        margin:10, 
+                        alignSelf:'center',
+                        backgroundColor: '#d1d1d1',
+                        borderColor: '#d1d1d1',
+                        }} 
+                        dropdownStyles={{width:'80%', alignSelf:'center'}}
+                        placeholder='Objeto' 
+                        inputStyles={{color: 'gray'}}
+                        setSelected={(val) => setSelected(val)} data={data} save="value"/>
 
-                    <Text 
+                    {selected === 'Camisa' && <Text 
                     style={{
                             fontSize: 20,
                             fontWeight: 'bold',
                             marginLeft: 15,
                             marginBottom: 20
-                    }}>Informacion Del Cliente</Text>
-                    
-                    <TextInput style={styles.input} placeholder='Nombre' value={name} onChangeText={setName}></TextInput>
+                    }}>Camisa</Text>}
 
-                    <TextInput style={styles.input} placeholder='Telefono' value={phone} onChangeText={setPhone}></TextInput>
-
-                    <Text 
+                    {selected === 'Sudadera' && <Text 
                     style={{
                             fontSize: 20,
                             fontWeight: 'bold',
                             marginLeft: 15,
-                            marginBottom: 20,
-                            marginTop: '5%'
-                    }}>Medidas De Lona</Text>
+                            marginBottom: 20
+                    }}>Sudadera</Text>}
 
-                    <View style={{
-                        flexDirection: 'row',
-                        alignItems: 'flex-start',
-                        justifyContent: 'space-evenly',
-                        marginLeft:15,
-                        marginRight:15}}>
-                    
-                        <TextInput style={styles.inputDoble} placeholder='Ancho (Mts)' value={ancho} onChangeText={setAncho}></TextInput>
-
-                        <TextInput style={styles.inputDoble} placeholder='Alto (Mts)' value={alto} onChangeText={setAlto}></TextInput>
-
-                    </View>
-
-                    <View style={{marginTop: '5%'}}>
-                    {Object.values(errors).map((error, index) => (
-                        <Text key={index} style={styles.error}>
-                            {error}
-                        </Text>
-                    ))}
-
-
-                    {image && <TouchableOpacity
-                    style={styles.boton}>
-
-                        <Text
-                        style={styles.textoBoton}>Register &#x2192;
-                        </Text>
-
-                    </TouchableOpacity>}
-
-                    
-                    </View>
-
-                    </GestureHandlerRootView>}
+                    {selected === 'Taza' && <Text 
+                    style={{
+                            fontSize: 20,
+                            fontWeight: 'bold',
+                            marginLeft: 15,
+                            marginBottom: 20
+                    }}>Taza</Text>}
                     
                     
-                    </View>
+                    
+                    
+                </View>
 
                 </ScrollView>
             </SafeAreaView>
