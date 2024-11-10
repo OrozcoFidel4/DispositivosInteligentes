@@ -110,7 +110,7 @@ const Lonas = () => {
                     style={{
                             fontSize: 20,
                             fontWeight: 'bold'
-                    }}>Modulo Lonas</Text>
+                    }}>Pedido Lonas</Text>
 
                     <Clock></Clock>
 
@@ -162,7 +162,7 @@ const Lonas = () => {
                             marginLeft: 15,
                             marginBottom: 20,
                             marginTop: '5%'
-                    }}>Medidas De Lona</Text>
+                    }}>Especificaciones de Lona</Text>
 
                     <View style={{
                         flexDirection: 'row',
@@ -226,7 +226,7 @@ const styles = StyleSheet.create({
     },
 
     superior2: {
-        marginBottom: '10%',
+        marginBottom: '5%',
         flexDirection:'row',
         justifyContent: 'space-between',
         marginLeft: 15
@@ -286,7 +286,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         borderColor: 'black',
         borderWidth: 5,
-        marginBottom: '5%'
+        marginBottom: 0
     },
 
     error: {

@@ -10,6 +10,35 @@ import { SelectList } from 'react-native-dropdown-select-list';
 
 const Personalizacion = () => {
 
+    /* Codigo para la navegacion */
+    const navigation = useNavigation();
+
+    /* Codigo para cargar imagen */
+    const [image, setImage] = useState('')
+
+    //Codigo para selectInput producto
+    const [selectedProducto, setSelectedProducto] = useState("");
+    const dataProducto = [
+        {key:'1', value:'Camisa'},
+        {key:'2', value:'Sudadera'},
+        {key:'3', value:'Taza'},
+    ]
+
+    const [selectedColor, setSelectedColor] = useState("");
+    const dataColor = [
+        {key:'1', value:'Negro'},
+        {key:'2', value:'Azul'},
+        {key:'3', value:'Gris'},
+    ]
+
+    const [selectedTalla, setSelectedTalla] = useState("");
+    const dataTalla = [
+        {key:'1', value:'S'},
+        {key:'2', value:'M'},
+        {key:'3', value:'L'},
+        {key:'4', value:'XL'},
+    ]
+
     // State variables to store form inputs, 
     // errors, and form validity
     const [name, setName] = useState('');
@@ -20,7 +49,6 @@ const Personalizacion = () => {
     const [isFormValid, setIsFormValid] = useState(false);
 
     const latinChars = /^([A-Za-z\u00C0-\u00D6\u00D8-\u00f6\u00f8-\u00ff\s\'\-]*)$/gi;
-    const emailChars = /\S+@\S+\.\S+/
     const phoneChars = /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/i;
     const dimensionChars = /^[-+]?[0-9]+\.[0-9]+$/;
 
@@ -28,7 +56,7 @@ const Personalizacion = () => {
 
     // Validacion Script
         validateForm();
-    }, [name, phone, ancho, alto]);
+    }, [name, phone, ancho, alto, selectedTalla, selectedColor]);
 
     const validateForm = () => {
         let errors = {};
@@ -43,7 +71,7 @@ const Personalizacion = () => {
         //Validar Telefono
         if (!phone) {
             errors.phone = 'Telefono es obligatorio';
-        } else if (!phoneChars.test || phone.length < 10 || phone.length >= 11) {
+        } else if (!phoneChars.test(phone) || phone.length < 10 || phone.length >= 11) {
             errors.phone = 'Telefono debe contener 10 digitos';
         }
 
@@ -51,34 +79,20 @@ const Personalizacion = () => {
         if (!ancho) {
             errors.ancho = 'Ancho es obligatorio';
         } else if (!dimensionChars.test(ancho)) {
-            errors.ancho = 'La medida Ancho debe ser en formato: XX.XX Mts';
+            errors.ancho = 'La medida Ancho debe ser en formato: XX.XX Cm';
         }
 
+        // Validar Alto
         if (!alto) {
             errors.alto = 'Alto es obligatorio';
-        } else if (!dimensionChars.test(alto)) {
-            errors.alto = 'La medida Alto debe ser en formato: XX.XX Mts';
+        } else if (!dimensionChars.test(ancho)) {
+            errors.alto = 'La medida Alto debe ser en formato: XX.XX Cm';
         }
 
         // Set the errors and update form validity
         setErrors(errors);
         setIsFormValid(Object.keys(errors).length === 0);
     };
-
-    // Codigo para la navegacion 
-    const navigation = useNavigation();
-
-    //Codigo para SelectList
-    const [selected, setSelected] = useState('');
-    const data = [
-        {key:'1', value:'Camisa'},
-        {key:'2', value:'Sudadera'},
-        {key:'3', value:'Taza'},
-        
-    ]
-
-    // Codigo para cargar imagen
-    const [image, setImage] = useState('')
 
     const handleImagePickerPress = async() => {
         let result = await ImagePicker.launchImageLibraryAsync({
@@ -88,6 +102,7 @@ const Personalizacion = () => {
             setImage(result.assets[0].uri)
         }
     }
+
 
     //Codigo para Scroll
     const [screenDimensions, setScreenDimensions] = useState(Dimensions.get('window'));
@@ -119,13 +134,13 @@ const Personalizacion = () => {
                     style={{
                             fontSize: 20,
                             fontWeight: 'bold'
-                    }}>Modulo Personalizacion</Text>
+                    }}>Pedido {selectedProducto}</Text>
 
-                    <Clock></Clock>
+                    <Clock/>
 
-                </View>
+                    </View>
 
-                <View style={styles.superior2}>
+                    <View style={styles.superior2}>
                     
                     <Text 
                     style={{
@@ -133,61 +148,221 @@ const Personalizacion = () => {
                             marginTop: 5,
                             color: 'gray'
                     }}>Usuario</Text>
-                </View>
+                    </View>
                     
-                {image && <Image source={{ uri: image }} style={styles.image} />}
 
-                <TouchableOpacity style={styles.botonCarga}onPress={handleImagePickerPress}>
+                    {image && <Image source={{ uri: image }} style={styles.image} />}
 
-                    <Text
-                        style={styles.textoBoton}>Cargar Diseño
-                    </Text>
+                    <TouchableOpacity style={styles.botonCarga}onPress={handleImagePickerPress}>
 
-                </TouchableOpacity>
+                        <Text
+                            style={styles.textoBoton}>Cargar Diseño
+                        </Text>
 
-                <View>
+                    </TouchableOpacity>
 
                     <SelectList boxStyles={{
-                        width:'80%', 
-                        borderRadius:'30%', 
-                        margin:10, 
-                        alignSelf:'center',
-                        backgroundColor: '#d1d1d1',
-                        borderColor: '#d1d1d1',
+                        alignSelf: 'center',
+                        justifyContent: 'center',
+                        backgroundColor:'gray',
+                        padding:10,
+                        marginTop: 10,
+                        width: '50%',
+                        height: 40,
+                        borderRadius: 10,
                         }} 
-                        dropdownStyles={{width:'80%', alignSelf:'center'}}
-                        placeholder='Objeto' 
-                        inputStyles={{color: 'gray'}}
-                        setSelected={(val) => setSelected(val)} data={data} save="value"/>
+                        search= {0}
+                        arrowicon={<></>}
+                        dropdownStyles={{width:'50%', alignSelf:'center', alignItems:'center'}}
+                        placeholder='Seleccionar Producto' 
+                        inputStyles={{color: 'white', alignSelf: 'center', fontSize: 15}}
+                        setSelected={(val) => setSelectedProducto(val)} data={dataProducto} save="value"/>
+                    
+                    {image && selectedProducto && <View style={{marginTop: '10%'}}>
+                        
+                        <Text 
+                            style={{
+                                    fontSize: 20,
+                                    fontWeight: 'bold',
+                                    marginLeft: 15,
+                                    marginBottom: 20
+                            }}>Informacion Del Cliente</Text>
 
-                    {selected === 'Camisa' && <Text 
-                    style={{
-                            fontSize: 20,
-                            fontWeight: 'bold',
-                            marginLeft: 15,
-                            marginBottom: 20
-                    }}>Camisa</Text>}
+                        <GestureHandlerRootView style={{}}>
+                            <TextInput style={styles.input} placeholder='Nombre' value={name} onChangeText={setName}/>
+                            <TextInput style={styles.input} placeholder='Telefono' value={phone} onChangeText={setPhone}/>
+                        </GestureHandlerRootView>
 
-                    {selected === 'Sudadera' && <Text 
-                    style={{
-                            fontSize: 20,
-                            fontWeight: 'bold',
-                            marginLeft: 15,
-                            marginBottom: 20
-                    }}>Sudadera</Text>}
+                        </View>}
 
-                    {selected === 'Taza' && <Text 
-                    style={{
-                            fontSize: 20,
-                            fontWeight: 'bold',
-                            marginLeft: 15,
-                            marginBottom: 20
-                    }}>Taza</Text>}
+                        {selectedProducto !== '' && <View>
+                            <Text 
+                            style={{
+                                    fontSize: 20,
+                                    fontWeight: 'bold',
+                                    marginLeft: 15,
+                                    marginBottom: 20,
+                                    marginTop: '5%'
+                            }}>Especificaciones {selectedProducto}</Text>
+
+                        
+                        <GestureHandlerRootView style={{}}>
+                            <View style={{
+                            flexDirection: 'row',
+                            alignItems: 'flex-start',
+                            justifyContent: 'space-evenly',
+                            marginLeft:15,
+                            marginRight:15}}>
+                        
+                            <TextInput style={styles.inputDoble} placeholder='Diseño Ancho (Cm)' value={ancho} onChangeText={setAncho}></TextInput>
+
+                            <TextInput style={styles.inputDoble} placeholder='Diseño Alto (Cm)' value={alto} onChangeText={setAlto}></TextInput>
+                            
+                            </View>
+
+                            
+                        </GestureHandlerRootView>
+                        </View>}
+
+                        
+                        {selectedProducto === 'Camisa' && <View style={{
+                            flexDirection: 'row',
+                            alignItems: 'flex-start',
+                            justifyContent: 'space-evenly',
+                            marginLeft:5,
+                            marginRight:5}}>
+
+                                <SelectList boxStyles={{
+                                alignSelf: 'center',
+                                marginTop: 10,
+                                marginBottom: 10,
+                                borderRadius: 30,
+                                marginHorizontal: 5,
+                                backgroundColor: '#d1d1d1',
+                                borderColor: '#d1d1d1',
+                                width: '160%',
+                                height: 50,
+                                paddingLeft: 20,
+                                }} 
+                                search= {0}
+                                arrowicon={<></>}
+                                dropdownStyles={{width:'150%', alignSelf:'center', alignItems:'center'}}
+                                placeholder='Talla' 
+                                inputStyles={{color: 'gray', alignSelf: 'center', fontSize: 15}}
+                                setSelected={(val) => setSelectedTalla(val)} data={dataTalla} save="value"/>
+
+                                <SelectList boxStyles={{
+                                alignSelf: 'center',
+                                marginTop: 10,
+                                marginBottom: 10,
+                                borderRadius: 30,
+                                
+                                backgroundColor: '#d1d1d1',
+                                borderColor: '#d1d1d1',
+                                width: '180%',
+                                height: 50,
+                                paddingLeft: 20,
+                                }} 
+                                search= {0}
+                                arrowicon={<></>}
+                                dropdownStyles={{width:'150%', alignSelf:'center', alignItems:'center'}}
+                                placeholder='Color' 
+                                inputStyles={{color: 'gray', alignSelf: 'center', fontSize: 15}}
+                                setSelected={(val) => setSelectedColor(val)} data={dataColor} save="value"/>
+
+                        </View>}
+
+                        {selectedProducto === 'Sudadera' && <View style={{
+                            flexDirection: 'row',
+                            alignItems: 'flex-start',
+                            justifyContent: 'space-evenly',
+                            marginLeft:5,
+                            marginRight:5}}>
+
+                                <SelectList boxStyles={{
+                                alignSelf: 'center',
+                                marginTop: 10,
+                                marginBottom: 10,
+                                borderRadius: 30,
+                                marginHorizontal: 5,
+                                backgroundColor: '#d1d1d1',
+                                borderColor: '#d1d1d1',
+                                width: '160%',
+                                height: 50,
+                                paddingLeft: 20,
+                                }} 
+                                search= {0}
+                                arrowicon={<></>}
+                                dropdownStyles={{width:'150%', alignSelf:'center', alignItems:'center'}}
+                                placeholder='Talla' 
+                                inputStyles={{color: 'gray', alignSelf: 'center', fontSize: 15}}
+                                setSelected={(val) => setSelectedTalla(val)} data={dataTalla} save="value"/>
+
+                                <SelectList boxStyles={{
+                                alignSelf: 'center',
+                                marginTop: 10,
+                                marginBottom: 10,
+                                borderRadius: 30,
+                                
+                                backgroundColor: '#d1d1d1',
+                                borderColor: '#d1d1d1',
+                                width: '180%',
+                                height: 50,
+                                paddingLeft: 20,
+                                }} 
+                                search= {0}
+                                arrowicon={<></>}
+                                dropdownStyles={{width:'150%', alignSelf:'center', alignItems:'center'}}
+                                placeholder='Color' 
+                                inputStyles={{color: 'gray', alignSelf: 'center', fontSize: 15}}
+                                setSelected={(val) => setSelectedColor(val)} data={dataColor} save="value"/>
+
+                        </View>}
+
+                        {selectedProducto === 'Taza' && <View>
+                            
+                            <SelectList boxStyles={{
+                            width:'80%', 
+                            borderRadius:'30%', 
+                            margin:10, 
+                            alignSelf:'center',
+                            backgroundColor: '#d1d1d1',
+                            borderColor: '#d1d1d1',
+                            }}
+                            search={0} 
+                            dropdownStyles={{width:'80%', alignSelf:'center'}}
+                            placeholder='Color' 
+                            inputStyles={{color: 'gray'}}
+                            setSelected={(val) => setSelectedColor(val)} data={dataColor} save="value"/>
+                            </View>}
+
+                            <View style={{marginTop: 5}}>
+                                {image && selectedProducto && 
+                                
+                                Object.values(errors).map((error, index) => (
+                                    <Text key={index} style={styles.error}>
+                                        {error}
+                                    </Text>
+                                ))}
+                            </View>
+
+                            {image && selectedProducto && <TouchableOpacity
+                            style={styles.boton}>
+
+                                <Text
+                                style={styles.textoBoton}>Realizar Pedido &#x2192;
+                                </Text>
+
+                            </TouchableOpacity>}
+
+                            
+                        
+                    
+
                     
                     
                     
                     
-                </View>
 
                 </ScrollView>
             </SafeAreaView>
@@ -214,7 +389,7 @@ const styles = StyleSheet.create({
     },
 
     superior2: {
-        marginBottom: '10%',
+        marginBottom: '5%',
         flexDirection:'row',
         justifyContent: 'space-between',
         marginLeft: 15
@@ -242,6 +417,17 @@ const styles = StyleSheet.create({
         paddingLeft: 20,
     },
 
+    inputDobleSelect:{
+        alignSelf: 'center',
+        marginTop: 10,
+        marginBottom: 10,
+        borderRadius: 30, 
+        backgroundColor: '#d1d1d1',
+        width: '40%',
+        height: 50,
+        paddingLeft: 20,
+    },
+
     boton:{
         alignSelf: 'center',
         backgroundColor:'red',
@@ -257,7 +443,7 @@ const styles = StyleSheet.create({
         backgroundColor:'gray',
         padding:10,
         marginTop: 10,
-        marginBottom: '10%',
+        marginBottom: 0,
         width: '50%',
         borderRadius: 10
     },
@@ -270,11 +456,11 @@ const styles = StyleSheet.create({
 
     image: {
         width: '30%',
-        height: '30%',
+        height: '10%',
         alignSelf: 'center',
         borderColor: 'black',
         borderWidth: 5,
-        marginBottom: '5%'
+        marginBottom: 0
     },
 
     error: {

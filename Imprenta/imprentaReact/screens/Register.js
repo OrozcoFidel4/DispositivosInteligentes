@@ -65,7 +65,6 @@ const Register = () => {
         {key:'1', value:'Administrador'},
         {key:'2', value:'Empleado'},
         {key:'3', value:'Tecnico'},
-        
     ]
 
     return (
