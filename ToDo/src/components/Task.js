@@ -4,9 +4,9 @@ import { View, Text, StyleSheet, Pressable } from "react-native";
 
 const Task = (props) =>{
     return(      
-            <View style= {styles.item} className='bg-neutral-100 dark:bg-neutral-700' >
+            <View style= {styles.item} className='bg-neutral-100' >
                 <View style={styles.itemLeft}>
-                    <Pressable style={styles.button} className='bg-neutral-300 dark:bg-neutral-300'></Pressable>
+                    <Pressable style={styles.button} className='bg-neutral-300'></Pressable>
                     <Text style={styles.itemText} className='dark:text-white'>{props.text}</Text>
                 </View>
                 <View style={styles.circular} className='border-neutral-300'></View>
@@ -22,7 +22,8 @@ const styles= StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        marginBottom: 10
+        marginBottom: 10,
+        backgroundColor: '#d4d6d5'
     },
     itemLeft: {
         flexDirection: "row",

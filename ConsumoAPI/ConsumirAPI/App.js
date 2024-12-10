@@ -1,9 +1,6 @@
 import React from 'react';
 import {ScrollView, FlatList, StyleSheet, Text, View } from 'react-native';
 
-
-
-
 export default class App extends React.Component{
   
   constructor(props){

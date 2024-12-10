@@ -1,7 +1,6 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 //Screens
 import Home from "./screens/Home";
@@ -11,18 +10,29 @@ import Impresiones from "./screens/Impresiones";
 import Personalizacion from "./screens/Personalizacion";
 import Lonas from "./screens/Lonas";
 import Reportes from "./screens/Reportes";
-import ImagePickerExample from "./screens/pruebas/Picker";
-import Validation from "./screens/pruebas/Validation";
+import HomeUser from "./screens/HomeUser";
+import InicioApp from "./screens/InicioApp";
+
 
 const Stack = createNativeStackNavigator();
 function MyStack() {
     return(
         <Stack.Navigator
-            initialRouteName="Home"
+            initialRouteName="Inicio"
         >
             <Stack.Screen
                 name="Home"
                 component={Home}
+                options={{
+                    headerShown: false,
+                    
+                }}
+
+            />
+
+            <Stack.Screen
+                name="Inicio"
+                component={InicioApp}
                 options={{
                     headerShown: true
                 }}
@@ -30,12 +40,11 @@ function MyStack() {
             />
 
             <Stack.Screen
-                name="Picker"
-                component={ImagePickerExample}
+                name='User Home'
+                component={HomeUser}
                 options={{
                     headerShown: true
                 }}
-
             />
 
             <Stack.Screen
@@ -78,7 +87,7 @@ function MyStack() {
                 name="Login"
                 component={Login}
                 options={{
-                    headerShown: true
+                    headerShown: false
                 }}
 
             />
@@ -96,47 +105,6 @@ function MyStack() {
         </Stack.Navigator>
     )
 }
-
-/* const Tab = createBottomTabNavigator();
-
-function MyTabs() {
-    return(
-        <Tab.Navigator
-            initialRouteName="Home"
-            screenOptions={{
-                tabBarActiveTintColor: "blue",
-                tabBarInactiveTintColor: "gray",
-                tabBarLabelStyle: ({color: "black"}),
-            }}
-        >
-            <Tab.Screen 
-                name="Home" 
-                component={MyStack}
-                options={{
-                    tabBarLabel:"Inicio",
-                    headerShown: false,
-                }}
-                />
-
-            <Tab.Screen 
-                name="Login" 
-                component={Login}
-                options={{
-                    tabBarLabel:"Login",
-                    headerShown: false,
-                }}
-                />
-
-            <Tab.Screen
-                name="Register"
-                component={Register}
-                options={{
-                    tabBarLabel:'Register',
-                    headerShown: false,
-                }}/>
-        </Tab.Navigator>
-    );
-} */
 
 export default function Navigation() {
     return(

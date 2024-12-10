@@ -1,8 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
 import Navigation from './Navigation';
 
-export default function App() {
+
+const App = () => {
+
   return (
     <Navigation/>
+    
   );
 }
+
+export default App;
