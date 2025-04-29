@@ -49,7 +49,7 @@ const Register = () => {
         // Validate password field
         if (!password) {
             errors.password = 'Password es obligatorio';
-        } else if (password.length < 6) {
+        } else if (password.length() < 6) {
             errors.password = 'Password debe contener al menos 6 caracteres';
         }
 
